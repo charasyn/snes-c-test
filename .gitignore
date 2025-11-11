@@ -1,2 +1,4 @@
 vbcc65816/**
 .vscode/**
+*.sfc
+*.o
