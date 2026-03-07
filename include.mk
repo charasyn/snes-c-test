@@ -3,7 +3,7 @@ export PATH := $(VBCC)/bin:$(PATH)
 export VBCC_PATH := $(VBCC_PATH)
 
 CC := vc
-AS := vc
+AS := vasm6502_oldstyle
 LD := vc
 
 # Flags are taken from Phillip May's snes-homebrew repo, which can be found here:
@@ -14,7 +14,7 @@ LDFLAGS := +snes-hi -lm -maxoptpasses=300 -O3 -inline-depth=1000 -unroll-all
 LDFLAGS += -fp-associative -force-statics -range-opt -D__VBCC__=1
 LDFLAGS += -D__VBCC65816__=1
 
-ASFLAGS := -816 -quiet -nowarn=62 -opt-branch -ldots -Fvobj
+ASFLAGS := -816 -vobj3 -nowarn=62 -opt-branch -Fvobj -dotdir
 
 CCFLAGS := $(LDFLAGS) -c
 
