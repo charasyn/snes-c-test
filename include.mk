@@ -23,7 +23,7 @@ CCFLAGS := $(LDFLAGS) -c
 all: $(TARGET)
 
 clean:
-	rm *.o *.sfc
+	rm *.o *.sfc 2>/dev/null || true
 
 .PHONY: all clean
 
@@ -35,3 +35,6 @@ clean:
 
 %.o: %.s
 	$(AS) $(ASFLAGS) -o $@ $<
+
+%.asm: %.c
+	$(CC) $(LDFLAGS) -o $@ -S $<

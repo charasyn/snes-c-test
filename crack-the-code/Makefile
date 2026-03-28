@@ -46,3 +46,6 @@ clean:
 
 %.o: %.s
 	$(AS) $(ASFLAGS) -o $@ $<
+
+%.asm: %.c
+	$(CC) $(LDFLAGS) -o $@ -S $<
