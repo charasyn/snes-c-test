@@ -1,6 +1,8 @@
-export VBCC := ../vbcc65816/vbcc65816_win/vbcc
-export PATH := $(VBCC)/bin:$(PATH)
-export VBCC_PATH := $(VBCC_PATH)
+# Assume if user has not set VBCC path, we are on my Windows machine...
+ifeq ($(VBCC),)
+   export VBCC := ../vbcc65816/vbcc65816_win/vbcc
+   export PATH := $(VBCC)/bin:$(PATH)
+endif
 
 CC := vc
 AS := vasm6502_oldstyle

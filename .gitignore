@@ -3,7 +3,11 @@ vbcc65816/**
 *.sfc
 *.o
 venv
+**/assets/*.s
+**/assets/*.h
+**/assets/*.bin
 
+###############################################################################
 # From Github's Python.gitignore
 # Byte-compiled / optimized / DLL files
 __pycache__/

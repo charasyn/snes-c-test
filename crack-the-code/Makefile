@@ -1,19 +1,24 @@
 TARGET := output.sfc
-OBJECTS := test.o asm_main.o
+OBJECTS := main.o asm_main.o assets/sprites.o
 
 all: $(TARGET)
 
 ### Dependencies
-test.o: test.c int_snes_xc.h snes_regs_xc.h
-
+main.o: main.c int_snes_xc.h snes_regs_xc.h assets/sprites.h
 asm_main.o: asm_main.s snesregs.s
 
+### Asset rules
+assets/sprites.s assets/sprites.h: assets/sprites.png assets/sprites.pal.png
+	$(TOOLS)/tileimg_to_bin.py --bpp=4 assets/sprites.png assets/sprites.pal.png assets/sprites.s
 
 ### Boilerplate
+# Assume if user has not set VBCC path, we are on my Windows machine...
+ifeq ($(VBCC),)
+   export VBCC := ../vbcc65816/vbcc65816_win/vbcc
+   export PATH := $(VBCC)/bin:$(PATH)
+endif
 
-export VBCC := ../vbcc65816/vbcc65816_win/vbcc
-export PATH := $(VBCC)/bin:$(PATH)
-export VBCC_PATH := $(VBCC_PATH)
+TOOLS := ../tools
 
 CC := vc
 AS := vasm6502_oldstyle
@@ -35,6 +40,7 @@ CCFLAGS := $(LDFLAGS) -c
 
 clean:
 	rm *.o *.sfc 2>/dev/null || true
+	rm assets/*.o assets/*.s assets/*.h assets/*.bin 2>/dev/null || true
 
 .PHONY: all clean
 
