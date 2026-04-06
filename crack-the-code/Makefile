@@ -1,11 +1,10 @@
 TARGET := output.sfc
-OBJECTS := main.o asm_main.o assets/sprites.o
+OBJECTS := main.o misc.o game.o platform.o randxor.o assets/sprites.o
 
 all: $(TARGET)
 
 ### Dependencies
-main.o: main.c int_snes_xc.h snes_regs_xc.h assets/sprites.h
-asm_main.o: asm_main.s snesregs.s
+main.o: main.c int_snes_xc.h snes_regs_xc.h assets/sprites.h game.h
 
 ### Asset rules
 assets/sprites.s assets/sprites.h: assets/sprites.png assets/sprites.pal.png
@@ -28,7 +27,7 @@ LD := vc
 # https://github.com/Phillip-May/snes-homebrew/blob/master/SimpleCDemos/shared/build/shared-config.mk
 
 # Can't use -O4 as it fails to find `main` when linking...
-LDFLAGS := +snes-hi -lm -maxoptpasses=300 -O3 -inline-depth=1000
+LDFLAGS := +snes-hi -lm -maxoptpasses=300 -Os -inline-depth=1000
 LDFLAGS += -fp-associative -force-statics -range-opt -D__VBCC__=1
 LDFLAGS += -D__VBCC65816__=1
 

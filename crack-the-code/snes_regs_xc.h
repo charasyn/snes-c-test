@@ -381,12 +381,16 @@ void free(void* ptr);
 #define JOY_Y_MASK       0x40
 #define JOY_B_MASK       0x80
 
+#define REG_JOY1    (*(vu16)0x4218) // byetUDLRaxlr0000
 #define REG_JOY1L   (*(vu8)0x4218) // axlr0000 = A/X/L/R button status
 #define REG_JOY1H   (*(vu8)0x4219) // byetUDLR = B/Y/SELECT/START/UP/DOWN/LEFT/RIGHT
+#define REG_JOY2    (*(vu16)0x421A) // byetUDLRaxlr0000
 #define REG_JOY2L   (*(vu8)0x421A) // 
 #define REG_JOY2H   (*(vu8)0x421B) // 
+#define REG_JOY3    (*(vu16)0x421C) // byetUDLRaxlr0000
 #define REG_JOY3L   (*(vu8)0x421C) // 
 #define REG_JOY3H   (*(vu8)0x421D) // 
+#define REG_JOY4    (*(vu16)0x421E) // byetUDLRaxlr0000
 #define REG_JOY4L   (*(vu8)0x421E) // 
 #define REG_JOY4H   (*(vu8)0x421F) // 
 
