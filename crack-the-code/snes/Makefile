@@ -1,5 +1,7 @@
+MAKEFLAGS += --always-make
+
 TARGET := output.sfc
-OBJECTS := main.o misc.o game.o platform.o randxor.o sprites.o
+OBJECTS := main.o misc.o game.o gameio.o platform.o randxor.o sprites.o
 
 SRC := ../src
 ASSETS := ../assets

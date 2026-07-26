@@ -9,6 +9,7 @@ venv
 **/snes/*.s
 **/snes/*.h
 **/snes/*.bin
+unittest_*
 
 ###############################################################################
 # From Github's Python.gitignore

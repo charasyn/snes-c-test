@@ -33,7 +33,7 @@ SOFTWARE.
 
 #define NUM_ELEMS(x) (sizeof(x)/sizeof(x[0]))
 
-static const int bgdropcolour = rgb15(28,28,28);
+static const int bgdropcolour = rgb15(22,24,24);
 static const int fgcolour[4] = {
     rgb15(31,31,31),
     rgb15(31,0,0),
