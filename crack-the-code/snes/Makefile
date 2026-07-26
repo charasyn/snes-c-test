@@ -1,23 +1,26 @@
 TARGET := output.sfc
-OBJECTS := main.o misc.o game.o platform.o randxor.o assets/sprites.o
+OBJECTS := main.o misc.o game.o platform.o randxor.o sprites.o
+
+SRC := ../src
+ASSETS := ../assets
+TOOLS := ../../tools
 
 all: $(TARGET)
 
 ### Dependencies
-main.o: main.c int_snes_xc.h snes_regs_xc.h assets/sprites.h game.h
+main.o: $(SRC)/main.c $(SRC)/int_snes_xc.h $(SRC)/snes_regs_xc.h sprites.h $(SRC)/game.h
 
 ### Asset rules
-assets/sprites.s assets/sprites.h: assets/sprites.png assets/sprites.pal.png
-	$(TOOLS)/tileimg_to_bin.py --bpp=4 assets/sprites.png assets/sprites.pal.png assets/sprites.s
+sprites.s sprites.h: $(ASSETS)/sprites.png $(ASSETS)/sprites.pal.png
+	$(TOOLS)/tileimg_to_bin.py --bpp=4 $(ASSETS)/sprites.png $(ASSETS)/sprites.pal.png sprites.s
 
 ### Boilerplate
 # Assume if user has not set VBCC path, we are on my Windows machine...
 ifeq ($(VBCC),)
-   export VBCC := ../vbcc65816/vbcc65816_win/vbcc
+   export VBCC := ../../vbcc65816/vbcc65816_win/vbcc
    export PATH := $(VBCC)/bin:$(PATH)
 endif
 
-TOOLS := ../tools
 
 CC := vc
 AS := vasm6502_oldstyle
@@ -33,24 +36,24 @@ LDFLAGS += -D__VBCC65816__=1
 
 ASFLAGS := -816 -vobj3 -nowarn=62 -opt-branch -Fvobj -dotdir
 
-CCFLAGS := $(LDFLAGS) -c
+CCFLAGS := $(LDFLAGS) -I. -c
 
 ### Targets
 
 clean:
 	rm *.o *.sfc 2>/dev/null || true
-	rm assets/*.o assets/*.s assets/*.h assets/*.bin 2>/dev/null || true
+	rm $(ASSETS)/*.o $(ASSETS)/*.s $(ASSETS)/*.h $(ASSETS)/*.bin 2>/dev/null || true
 
 .PHONY: all clean
 
 %.sfc: $(OBJECTS)
 	$(LD) $(LDFLAGS) -o $@ $^
 
-%.o: %.c
+%.o: $(SRC)/%.c
 	$(CC) $(CCFLAGS) -o $@ $<
 
-%.o: %.s
+%.o: $(SRC)/%.s
 	$(AS) $(ASFLAGS) -o $@ $<
 
-%.asm: %.c
+%.asm: $(SRC)/%.c
 	$(CC) $(LDFLAGS) -o $@ -S $<

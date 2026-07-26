@@ -6,6 +6,9 @@ venv
 **/assets/*.s
 **/assets/*.h
 **/assets/*.bin
+**/snes/*.s
+**/snes/*.h
+**/snes/*.bin
 
 ###############################################################################
 # From Github's Python.gitignore

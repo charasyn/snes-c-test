@@ -24,7 +24,7 @@ SOFTWARE.
 
 #include "snes_regs_xc.h"
 
-#include "assets/sprites.h"
+#include "sprites.h"
 
 #include "platform.h"
 #include "game.h"
