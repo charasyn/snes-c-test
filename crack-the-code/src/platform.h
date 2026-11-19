@@ -29,3 +29,5 @@ void OamMan_completeFrame(void);
 _PLATFORM_VAR volatile key_t Keys_Held;
 _PLATFORM_VAR volatile key_t Keys_Pressed;
 void Keys_process(void);
+
+extern int Global_FrameCounter;
